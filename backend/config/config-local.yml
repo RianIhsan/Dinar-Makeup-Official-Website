@@ -20,7 +20,7 @@ redis:
   MinIdleConns: 200
   PoolSize: 12000
   PoolTimeout: 240
-  Password: "eICYITvgylNjrVCnyjsLxbViJMxLhSif"
+  Password: eICYITvgylNjrVCnyjsLxbViJMxLhSif
 
 logger:
   Level: trace # Required [trace, debug, info, warn, error, fatal, panic]
