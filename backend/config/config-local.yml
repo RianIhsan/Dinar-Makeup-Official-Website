@@ -9,10 +9,10 @@ server:
 
 postgres:
   User: postgres # Required
-  Password: postgres # Required
-  Host: localhost # Required
-  Port: 5444 # Required
-  Dbname: db_20102024 # Required
+  Password: KXNQQfiiAuZtLnfdyLoLwSDvtkGpvzpP # Required
+  Host: postgres.railway.internal # Required
+  Port: 5432 # Required
+  Dbname: railway # Required
 
 redis:
   Addr: localhost:6379
