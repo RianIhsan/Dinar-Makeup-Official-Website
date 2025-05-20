@@ -85,9 +85,9 @@ func NewAppConfig(configPath string) (*Config, error) {
 	v.SetConfigType("env")
 	v.AutomaticEnv()
 
-	if err := v.ReadInConfig(); err != nil {
-		return nil, fmt.Errorf("error reading .env file: %v", err)
-	}
+	// if err := v.ReadInConfig(); err != nil {
+	// 	return nil, nil
+	// }
 
 	// Binding env ke struct
 	cfg := new(Config)
