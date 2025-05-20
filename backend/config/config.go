@@ -1,7 +1,9 @@
 package config
 
 import (
+	"fmt"
 	"github.com/spf13/viper"
+	"os"
 	"time"
 )
 
@@ -83,12 +85,12 @@ func NewAppConfig(configPath string) (*Config, error) {
 	v.AutomaticEnv()
 
 	if _, err := os.Stat(".env"); err == nil {
-    v.SetConfigFile(".env")
-    v.SetConfigType("env")
-    if err := v.ReadInConfig(); err != nil {
-        return nil, fmt.Errorf("error reading .env file: %v", err)
-    }
-}
+		v.SetConfigFile(".env")
+		v.SetConfigType("env")
+		if err := v.ReadInConfig(); err != nil {
+			return nil, fmt.Errorf("error reading .env file: %v", err)
+		}
+	}
 
 	// Binding env ke struct
 	cfg := new(Config)
