@@ -8,11 +8,11 @@ server:
   JWTSecretKey: ApWynlzzJXSlWGmnu50jBYzSjaawrcXn # Required
 
 postgres:
-  User: postgres # Required
-  Password: KXNQQfiiAuZtLnfdyLoLwSDvtkGpvzpP # Required
-  Host: postgres.railway.internal # Required
-  Port: 5432 # Required
-  Dbname: railway # Required
+  User: avnadmin # Required
+  Password: AVNS_VmmPe0abrYIdF9KW1he # Required
+  Host: pg-28e505e2-rianwhatsup-a05d.h.aivencloud.com # Required
+  Port: 10211 # Required
+  Dbname: defaultdb # Required
 
 redis:
   Addr: redis.railway.internal:6379
