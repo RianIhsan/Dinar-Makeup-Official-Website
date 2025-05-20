@@ -18,7 +18,31 @@ async function login(email, password) {
     return response.data;
   } catch (error) {
     // console.log("Error : ", error);
-    throw (error|| "Something went wrong");
+    throw (error || "Something went wrong");
+  }
+}
+
+//Function My Profile
+async function getMe() {
+  try {
+    const response = await instance.get(`/me`);
+    return response.data;
+  } catch (error) {
+    // console.log("Error : ", error);
+    throw (error || "Something went wrong");
+  }
+}
+
+//Update Profile
+async function updateProfile(data) {
+  console.log(data);
+  try {
+    const response = await instance.put('/user', data);
+    return response.data;
+  }
+  catch (error) {
+    // console.log("Error : ", error);
+    throw (error || "Something went wrong");
   }
 }
 
@@ -44,8 +68,9 @@ async function getProductByID(id) {
   }
 }
 
-export { 
-  register, login, 
-  getAllProducts, getProductByID
+export {
+  register, login,
+  getAllProducts, getProductByID,
+  getMe, updateProfile
 };
 
