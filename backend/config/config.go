@@ -80,8 +80,6 @@ func NewAppConfig(configPath string) (*Config, error) {
 	v := viper.New()
 
 	// Baca dari file .env
-	v.SetConfigFile(".env")
-	v.SetConfigType("env")
 	v.AutomaticEnv()
 
 	if _, err := os.Stat(".env"); err == nil {
