@@ -15,12 +15,12 @@ postgres:
   Dbname: railway # Required
 
 redis:
-  Addr: localhost:6379
+  Addr: redis.railway.internal:6379
   DB: 0
   MinIdleConns: 200
   PoolSize: 12000
   PoolTimeout: 240
-  Password: ""
+  Password: "eICYITvgylNjrVCnyjsLxbViJMxLhSif"
 
 logger:
   Level: trace # Required [trace, debug, info, warn, error, fatal, panic]
