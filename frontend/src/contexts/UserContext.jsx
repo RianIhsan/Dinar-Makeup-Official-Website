@@ -1,6 +1,7 @@
 import { createContext, useCallback, useEffect, useState } from 'react';
 import { getMe } from '../modules/fetch';
 import { useNavigate } from 'react-router-dom';
+import Cookies from "js-cookie";
 
 export const UserContext = createContext();
 
@@ -8,24 +9,25 @@ export const UserContextProvider = ({ children }) => {
   const navigate = useNavigate()
   const [userState, setUserState] = useState({}); // data profile kita
   const [img_profile_link, set_img_profile_link] = useState("");
+  const [isLogin, setIsLogin] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
-
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getMe(); // get semua data profile mu
         if (response.status === 200) {
-          if (response.data.role == "admin") { // kondisi admin / bukan ada disini
-            setIsAdmin(true)
-          } else {
-            setIsAdmin(false)
-          }
-          setUserState(response.data); //mengerim response get diatas ke react context
-        }
+          setIsLogin(true)
+          
+          if (response.data.role == "admin") setIsAdmin(true) // kondisi admin / bukan ada disini
+          else setIsAdmin(false)
+
+          setUserState(response.data); //mengirim response get diatas ke react context
+        } else setIsLogin(false)
       }
-      catch (err) {
-        // console.log(err)
+      catch (err) { // Auto Logout ketika SESSION Habis
+        setIsLogin(false)
+        Cookies.remove("token");
       }
     };
     fetchData();
@@ -41,6 +43,7 @@ export const UserContextProvider = ({ children }) => {
       userState, setUserState,
       img_profile_link,
       set_img_profile_link,
+      isLogin, setIsLogin,
       isAdmin, setIsAdmin,
       updateUser,
     }}>
