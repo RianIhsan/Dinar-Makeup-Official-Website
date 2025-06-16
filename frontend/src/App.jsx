@@ -28,6 +28,8 @@ import UserManagementPage from './pages/Admin/UserManagementPage';
 import ProductManagementPage from './pages/Admin/ProductManagement/ProductManagementPage';
 import EditProductManagementPage from './pages/Admin/ProductManagement/EditProductManagementPage';
 import CreateProductManagementPage from './pages/Admin/ProductManagement/CreateProductManagementPage';
+import OrderPage from './pages/Order/OrderPage';
+import PaymentPage from './pages/Order/PaymentPage';
 
 // Framer Motion (Efek Transisi Faded Perpindahan Page)
 const PageMotionWrapper = ({ children }) => (
@@ -59,7 +61,7 @@ function App() {
           <Route path="/about" element={<PageMotionWrapper><AboutPage /></PageMotionWrapper>} />
           <Route path="/gallery" element={<PageMotionWrapper><GalleryPage /></PageMotionWrapper>} />
           <Route path="/pricing" element={<PageMotionWrapper><PricingPage /></PageMotionWrapper>} />
-          <Route path="/rating" element={<PageMotionWrapper><RatingPage /></PageMotionWrapper>} />
+          {/* <Route path="/rating" element={<PageMotionWrapper><RatingPage /></PageMotionWrapper>} /> */}
           <Route path="/contact" element={<PageMotionWrapper><ContactPage /></PageMotionWrapper>} />
 
           <Route path="/login" element={<PageMotionWrapper><LoginPage /></PageMotionWrapper>} />
@@ -68,6 +70,8 @@ function App() {
 
           {/* Login Route */}
           <Route path="/profile" element={<LoginRoute><PageMotionWrapper><ProfilePage /></PageMotionWrapper></LoginRoute>} />
+          <Route path="/order/:id" element={<LoginRoute><PageMotionWrapper><OrderPage /></PageMotionWrapper></LoginRoute>} />
+          <Route path="/payment" element={<LoginRoute><PageMotionWrapper><PaymentPage /></PageMotionWrapper></LoginRoute>} />
 
           {/* Admin Route */}
           <Route path="/admin/" element={<LoginRoute><AdminRoute><AdminSidebar><PageMotionWrapper><DashboardPage /></PageMotionWrapper></AdminSidebar></AdminRoute></LoginRoute>} />

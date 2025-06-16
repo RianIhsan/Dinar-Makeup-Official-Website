@@ -4,6 +4,7 @@ import logoDinarMakeupCrop from '/img/logo/logoDinarMakeupCrop.jpg';
 import toast, { Toaster } from 'react-hot-toast';
 import Cookies from "js-cookie";
 import { UserContext } from '../contexts/UserContext';
+import { googleLogout } from '@react-oauth/google';
 
 
 function Navbar() {
@@ -45,7 +46,7 @@ function Navbar() {
             <li><a onClick={() => navigate("/about")} className={location.pathname == '/about' ? 'menu-active' : ''}>About</a></li>
             <li><a onClick={() => navigate("/gallery")} className={location.pathname == '/gallery' ? 'menu-active' : ''}>Gallery</a></li>
             <li><a onClick={() => navigate("/pricing")} className={location.pathname == '/pricing' ? 'menu-active' : ''}>Pricing</a></li>
-            <li><a onClick={() => navigate("/rating")} className={location.pathname == '/rating' ? 'menu-active' : ''}>Rating</a></li>
+            {/* <li><a onClick={() => navigate("/rating")} className={location.pathname == '/rating' ? 'menu-active' : ''}>Rating</a></li> */}
             <li><a onClick={() => navigate("/contact")} className={location.pathname == '/contact' ? 'menu-active' : ''}>Contact</a></li>
           </ul>
 
@@ -66,7 +67,7 @@ function Navbar() {
             <li><a onClick={() => navigate("/about")} className={location.pathname == '/about' ? 'menu-active' : ''}>About</a></li>
             <li><a onClick={() => navigate("/gallery")} className={location.pathname == '/gallery' ? 'menu-active' : ''}>Gallery</a></li>
             <li><a onClick={() => navigate("/pricing")} className={location.pathname == '/pricing' ? 'menu-active' : ''}>Pricing</a></li>
-            <li><a onClick={() => navigate("/rating")} className={location.pathname == '/rating' ? 'menu-active' : ''}>Rating</a></li>
+            {/* <li><a onClick={() => navigate("/rating")} className={location.pathname == '/rating' ? 'menu-active' : ''}>Rating</a></li> */}
             <li><a onClick={() => navigate("/contact")} className={location.pathname == '/contact' ? 'menu-active' : ''}>Contact</a></li>
           </ul>
         </div>
@@ -84,9 +85,9 @@ function Navbar() {
                   <img alt="Tailwind CSS Navbar component" src={userState.avatar || import.meta.env.VITE_PROFILE_DEFAULT} />
                 </div>
               </label>
-              <ul tabIndex={0} className="mt-5 z-[50] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+              <ul tabIndex={0} className="mt-5 z-[50] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-fit">
                 <li>
-                  <div className="avatar" onClick={() => navigate("/profile")}>
+                  <div className="avatar p-2" onClick={() => navigate("/profile")}>
                     <div className="w-8 rounded-full">
                       <img src={userState.avatar || import.meta.env.VITE_PROFILE_DEFAULT} alt="profile" />
                     </div>
@@ -105,6 +106,7 @@ function Navbar() {
 
                 <li><a
                   onClick={() => {
+                    googleLogout();
                     setIsLogin(false);
                     Cookies.remove("token");
                     navigate('/')

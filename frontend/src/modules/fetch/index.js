@@ -22,10 +22,34 @@ async function login(email, password) {
   }
 }
 
+// Function for login user endpoint
+async function loginGoogle(id_token) {
+  try {
+    console.log(id_token);
+    const response = await instance.post("/login/google", { id_token });
+    return response.data;
+  } catch (error) {
+    // console.log("Error : ", error);
+    throw (error || "Something went wrong");
+  }
+}
+
 //Function My Profile
 async function getMe() {
   try {
     const response = await instance.get(`/me`);
+    return response.data;
+  } catch (error) {
+    // console.log("Error : ", error);
+    throw (error || "Something went wrong");
+  }
+}
+
+//  Function for create order endpoint
+async function createOrder(data) {
+  console.log(data);
+  try {
+    const response = await instance.post("/order", data);
     return response.data;
   } catch (error) {
     // console.log("Error : ", error);
@@ -97,6 +121,17 @@ async function createProduct(data) {
   }
 }
 
+// ADMIN : Function for Update product endpoint
+async function updateProduct(id, data) {
+  try {
+    const response = await instance.put(`/products/${id}`, data);
+    return response;
+  } catch (error) {
+    // console.log("Error : ", error);
+    throw (error || "Something went wrong");
+  }
+}
+
 // ADMIN : Function for create image product endpoint
 async function uploadImageProduct(formData) {
   const formDataObject = Object.fromEntries(formData.entries());
@@ -104,6 +139,28 @@ async function uploadImageProduct(formData) {
     const response = await instance.post(`/products/${formDataObject.id}/images`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
+    return response.data;
+  } catch (error) {
+    // console.log("Error : ", error);
+    throw (error || "Something went wrong");
+  }
+}
+
+// ADMIN : Function for delete user by ID
+async function deleteProductByID(id) {
+  try {
+    const response = await instance.delete(`/products/${id}`);
+    return response.data;
+  } catch (error) {
+    // console.log("Error : ", error);
+    throw (error || "Something went wrong");
+  }
+}
+
+// ADMIN : Function for delete image product endpoint
+async function deleteImageProduct(id) {
+  try {
+    const response = await instance.delete(`/products/images/${id}`);
     return response.data;
   } catch (error) {
     // console.log("Error : ", error);
@@ -149,11 +206,12 @@ async function getAllTrasaction(params = {}) {
 }
 
 export {
-  register, login,
+  register, login, loginGoogle,
   getAllProducts, getProductByID,
-  createProduct, uploadImageProduct,
+  createProduct, updateProduct, uploadImageProduct, deleteProductByID, deleteImageProduct,
   getMe, updateProfile, updateProfileAvatar,
+  createOrder,
   getAllUsers, deleteUserByID,
-  getAllTrasaction,
+  getAllTrasaction, 
 };
 
