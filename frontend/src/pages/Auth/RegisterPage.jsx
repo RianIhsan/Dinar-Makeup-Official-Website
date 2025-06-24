@@ -91,7 +91,7 @@ function RegisterPage() {
     <div className='px-0'>
 
       <div className="h-screen flex justify-center items-center">
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card absolute sm:relative sm:shadow-xl top-0 w-96 bg-base-100">
 
           <Toaster
             toastOptions={{
@@ -101,7 +101,7 @@ function RegisterPage() {
             }}
           />
 
-          <div className="card-body gap-0">
+          <div className="card-body gap-0 p-3 sm:p-6">
             <div className="card-actions justify-between mb-5">
               <h2 className="card-title text-2xl">Register</h2>
               <button className="btn btn-square btn-sm" onClick={() => navigate("/")}>
