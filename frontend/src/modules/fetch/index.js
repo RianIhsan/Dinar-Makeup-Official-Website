@@ -25,7 +25,6 @@ async function login(email, password) {
 // Function for login user endpoint
 async function loginGoogle(id_token) {
   try {
-    console.log(id_token);
     const response = await instance.post("/login/google", { id_token });
     return response.data;
   } catch (error) {
@@ -47,7 +46,6 @@ async function getMe() {
 
 //  Function for create order endpoint
 async function createOrder(data) {
-  console.log(data);
   try {
     const response = await instance.post("/order", data);
     return response.data;
@@ -57,9 +55,22 @@ async function createOrder(data) {
   }
 }
 
+//  Function for upload any file after order endpoint
+async function uploadDocumentOrder(formData) {
+  const formDataObject = Object.fromEntries(formData.entries());
+  try {
+    const response = await instance.post(`/order/document`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data;
+  } catch (error) {
+    // console.log("Error : ", error);
+    throw (error || "Something went wrong");
+  }
+}
+
 //Update Profile
 async function updateProfile(data) {
-  console.log(data);
   try {
     const response = await instance.put('/user', data);
     return response.data;
@@ -77,7 +88,7 @@ async function updateProfileAvatar(formData) {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response.data;
-  } 
+  }
   catch (error) {
     const file = formData.get('file');
     if (file && file.size > 2000000) {
@@ -210,8 +221,8 @@ export {
   getAllProducts, getProductByID,
   createProduct, updateProduct, uploadImageProduct, deleteProductByID, deleteImageProduct,
   getMe, updateProfile, updateProfileAvatar,
-  createOrder,
+  createOrder, uploadDocumentOrder,
   getAllUsers, deleteUserByID,
-  getAllTrasaction, 
+  getAllTrasaction,
 };
 
