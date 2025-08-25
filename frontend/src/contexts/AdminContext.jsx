@@ -33,7 +33,7 @@ export const AdminContextProvider = ({ children }) => {
         console.error("Error : ", error);
       }
     };
-    if (location.pathname == "/admin/product-management") fetchDataProductManagement();
+    if (location.pathname == "/admin/product-management" || "/admin" || "/admin/dashboard") fetchDataProductManagement();
 
     // ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -41,15 +41,16 @@ export const AdminContextProvider = ({ children }) => {
       try {
         // console.log('refresh /admin/user-management');
         let page = parseInt(searchParams.get("page"));
-        let limit = parseInt(searchParams.get("limit")); 
-        // limit = 1 // custom limit
+        let limit = parseInt(searchParams.get("limit")); // default = 1000
+        if (location.pathname == "/admin/user-management" && !searchParams.get("limit")) limit = 10 // custom limit
+        
         const response = await getAllUsers({page, limit}); // Fetch data
         if (response.status === 200) setUsersState(response.data); // Set state if the response is successful
       } catch (error) {
         console.error("Error : ", error);
       }
     };
-    if (location.pathname == "/admin/user-management") fetchDataUserManagement();
+    if (location.pathname == "/admin/user-management" || "/admin" || "/admin/dashboard") fetchDataUserManagement();
 
     // ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -57,15 +58,16 @@ export const AdminContextProvider = ({ children }) => {
       try {
         // console.log('refresh /admin/transaction-management');
         let page = parseInt(searchParams.get("page"));
-        let limit = parseInt(searchParams.get("limit")); 
-        // limit = 1 // custom limit
-        const response = await getAllTrasaction({page, limit: 10}); // Fetch data
+        let limit = parseInt(searchParams.get("limit")); // default = 1000
+        if (location.pathname == "/admin/transaction-management" && !searchParams.get("limit")) limit = 10  // custom limit
+
+        const response = await getAllTrasaction({page, limit}); // Fetch data
         if (response.status === 200) setTranscactionState(response.data); // Set state if the response is successful
       } catch (error) {
         console.error("Error : ", error);
       }
     };
-    if (location.pathname == "/admin/transaction-management") fetchDataTransactionManagement();
+    if (location.pathname == "/admin/transaction-management" || "/admin" || "/admin/dashboard") fetchDataTransactionManagement();
 
     // ----------------------------------------------------------------------------------------------------------------------------------
 

@@ -3,8 +3,10 @@ import { AdminContext } from "../../contexts/AdminContext";
 import { deleteUserByID, getAllUsers } from "../../modules/fetch";
 import toast, { Toaster } from 'react-hot-toast';
 import RefreshButton from "../../components/Admin/RefreshButton";
+import { useNavigate } from "react-router-dom";
 
 function UserManagementPage() {
+  const navigate = useNavigate();
   const { usersState, refreshCallback } = useContext(AdminContext);
 
   const totalPages = usersState?.metadata?.total_pages || 0;
@@ -23,7 +25,7 @@ function UserManagementPage() {
         />
 
         <div className="flex justify-center">
-          <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mb-3 w-full shadow-sm">
+          <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mb-3 w-full shadow-sm shadow-sm max-h-[86vh] overflow-auto">
             <table className="table table-xs sm:table-md table-zebra">
               {/* head */}
               <thead>
@@ -37,7 +39,7 @@ function UserManagementPage() {
               <tbody>
                 {usersState?.data?.map((user, index) => (
                   <tr key={user.id || index}>
-                    <th className="text-center sm:text-start">{index + 1}</th>
+                    <th className="text-center sm:text-start">{(index + 1) + (currentPage * 10) - 10}</th>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td className="flex gap-2">

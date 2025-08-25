@@ -1,13 +1,12 @@
 import { useContext } from "react";
 import { AdminContext } from "../../../contexts/AdminContext";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
 import DataFormBooking from "../../../components/TransactionsPage/DataFormBooking";
 import { deleteTransactionByID } from "../../../modules/fetch";
 import RefreshButton from "../../../components/Admin/RefreshButton";
 
 function TransactionManagementPage() {
-  let location = useLocation();
   const navigate = useNavigate();
   const { transcactionState, refreshCallback } = useContext(AdminContext)
 
@@ -27,7 +26,7 @@ function TransactionManagementPage() {
         />
 
         <div className="flex justify-center">
-          <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mb-3 w-full shadow-sm">
+          <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mb-3 w-full shadow-sm shadow-sm max-h-[86vh] overflow-auto">
             <div className="overflow-x-auto">
               <table className="table table-xs sm:table-md table-zebra">
                 {/* Table Header */}
@@ -47,7 +46,7 @@ function TransactionManagementPage() {
                     ?.sort((a, b) => new Date(b.transaction_information.transaction_time) - new Date(a.transaction_information.transaction_time))
                     .map((trx, index) => (
                       <tr key={trx.id} className="hover">
-                        <th className="text-center sm:text-start">{index + 1}</th>
+                        <th className="text-center sm:text-start">{(index + 1) + (currentPage * 10) - 10}</th>
                         <td>
                           <span className="py-7 sm:py-0 badge badge-outline badge-primary badge-sm text-center">
                             {trx.order_id}
